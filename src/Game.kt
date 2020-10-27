@@ -46,11 +46,10 @@ fun main(args: Array<String>) {
            "is in awful condition!"
        } */
     val healthStatus = formatHealthStatus(healthPoint, isBlessed)
-
     //3.7 Стан гравця
     //3.12 auraColor
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
-    castFireball(5)
+    castFireball()
 
 }
 
@@ -79,12 +78,14 @@ private fun auraColor(isBlessed: Boolean, healthPoint: Int, isImmortal: Boolean)
     return auraColor
 }
 
-private fun castFireball(numFireballs: Int) {
+//4.6 private fun castFireball(numFireballs: Int=2) {
+private fun castFireball (numFireballs: Int=2) =
     println("A glass of Fireball springs into existence. (x$numFireballs)")
-}
-
-private fun formatHealthStatus(healthPoint: Int, isBlessed: Boolean): String {
-    val healthStatus = when (healthPoint) {
+//}
+/*4.6 private fun formatHealthStatus(healthPoint: Int, isBlessed: Boolean): String {
+    val healthStatus = when (healthPoint) {*/
+private fun formatHealthStatus(healthPoint: Int, isBlessed: Boolean) =
+    when (healthPoint) {
         100 -> "is in excellent condition!"
         in 90..99 -> "has a few scratches."
         in 75..89 -> if (isBlessed) {
@@ -95,5 +96,5 @@ private fun formatHealthStatus(healthPoint: Int, isBlessed: Boolean): String {
         in 15..74 -> "looks pretty hurt."
         else -> "is in awful condition!"
     }
-    return healthStatus
+    //4.6 return healthStatus
 }
