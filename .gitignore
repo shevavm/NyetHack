@@ -16,3 +16,4 @@
 /app/src/androidTest/
 .externalNativeBuild
 .cxx
+/out/
