@@ -97,4 +97,4 @@ private fun formatHealthStatus(healthPoint: Int, isBlessed: Boolean) =
         else -> "is in awful condition!"
     }
     //4.6 return healthStatus
-}
+//}
