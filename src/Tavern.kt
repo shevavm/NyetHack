@@ -1,5 +1,10 @@
+import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"//7.1
 
+//8.1
+var playerGold = 10
+var playerSilver = 10
 //6.1
 fun main(args: Array <String>) {
     /*6.2 var signatureDrink = "Buttered Ale"
@@ -26,7 +31,26 @@ fun main(args: Array <String>) {
     val beverageServed: String = beverage ?: "Buttered Ale"
     println(beverageServed)*/
     //7.7 placeOrder("shandy, Dragon's Breath, 5.91")
-    placeOrder("elixir, Shirley's Temple, 4.12")
+    //8.1 placeOrder("elixir, Shirley's Temple, 4.12")
+    placeOrder("shandy, Dragon's Breath, 5.91")
+}
+
+fun performPurchase(price: Double) {
+    displayBalance()
+    val totalPurse = playerGold + (playerSilver / 100.0) //8.4
+    println("Total purse: $totalPurse")
+    println("Purchasing item for $price")
+    val remainingBalance = totalPurse - price
+    println("Remaining balance: ${"%.2f".format(remainingBalance)}")//8.5
+    val remainingGold = remainingBalance.toInt()
+    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+    playerGold = remainingGold
+    playerSilver = remainingSilver
+    displayBalance()
+}
+
+private fun displayBalance() {
+    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }
 
 private fun toDragonSpeak(phrase: String) =
@@ -55,7 +79,9 @@ private fun placeOrder(menuData: String) {
     println(message)
 
     /*7.6 val phrase = "Ah, delicious $name!"
-    println("Madrigal exclamims: ${toDragonSpeak(phrase)}")*/
+    println("Madrigal exclaims: ${toDragonSpeak(phrase)}")*/
+
+    performPurchase(price.toDouble())//8.1 8.3
 
     val phrase = if (name == "Dragon's Breath") {
         "Madrigal exclaims ${toDragonSpeak("Ah, delicious $name!")}"
