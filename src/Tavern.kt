@@ -1,18 +1,19 @@
 import java.io.File
-
+import kotlin.math.roundToInt
 const val TAVERN_NAME = "Taernyl's Folly"//7.1
 
-//8.1
+/*11.6 8.1
 var playerGold = 10
 var playerSilver = 10
-//10.10 val patronList = listOf("Eli","Mordoc","Sophie")//10.1 10.4
+//10.10 val patronList = listOf("Eli","Mordoc","Sophie")//10.1 10.4 */
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")//10.24
 val uniquePatrons = mutableSetOf<String>()
 val menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n") //10.17
-
+//val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)//11.5
+val patronGold = mutableMapOf<String, Double>()
 
 //6.1
 fun main(args: Array <String>) {
@@ -78,7 +79,8 @@ fun main(args: Array <String>) {
         //println(name) 10.25
         uniquePatrons += name
     }
-    println(uniquePatrons)
+    //11.5println(uniquePatrons)
+    uniquePatrons.forEach { patronGold[it] = 6.0 }
 
     var orderCount = 0 //10.26
     while (orderCount <= 9) {
@@ -88,6 +90,11 @@ fun main(args: Array <String>) {
         )
         orderCount++
     }
+    /*println(patronGold)//11.1
+    println(patronGold["Eli"])
+    println(patronGold["Mordoc"])
+    println(patronGold["Sophie"])//11.4*/
+    displayPatronBalances()//11.7
 
     patronList.forEach { patron ->
         //10.14
@@ -95,6 +102,11 @@ fun main(args: Array <String>) {
     }
 }
 
+private fun displayPatronBalances() {
+    patronGold.forEach { patron, balance ->
+        println("$patron, balance: ${"%.2f".format(balance)}")
+    }
+}
 /*fun performPurchase(price: Double) {
     displayBalance()
     val totalPurse = playerGold + (playerSilver / 100.0) //8.4
@@ -107,10 +119,15 @@ fun main(args: Array <String>) {
     playerGold = remainingGold
     playerSilver = remainingSilver
     displayBalance()
-}*/
+}
 
 private fun displayBalance() {
     println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+}*/
+
+fun performPurchase(price: Double, patronName: String) {
+    val totalPurse = patronGold.getValue(patronName)
+    patronGold[patronName] = totalPurse - price
 }
 
 private fun toDragonSpeak(phrase: String) =
