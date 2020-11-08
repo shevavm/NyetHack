@@ -1,18 +1,20 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
-import kotlin.math.roundToInt
+
 const val TAVERN_NAME = "Taernyl's Folly"//7.1
 
 /*11.6 8.1
 var playerGold = 10
 var playerSilver = 10
-//10.10 val patronList = listOf("Eli","Mordoc","Sophie")//10.1 10.4 */
+//10.10 val com.bignerdranch.nyethack.getPatronList = listOf("Eli","Mordoc","Sophie")//10.1 10.4 */
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")//10.24
 val uniquePatrons = mutableSetOf<String>()
 val menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n") //10.17
-//val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)//11.5
+//val com.bignerdranch.nyethack.getPatronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)//11.5
 val patronGold = mutableMapOf<String, Double>()
 
 //6.1
@@ -40,8 +42,8 @@ fun main(args: Array <String>) {
 //    println(beverage) 6.10
     val beverageServed: String = beverage ?: "Buttered Ale"
     println(beverageServed)
-    //7.7 placeOrder("shandy, Dragon's Breath, 5.91")
-    //8.1 placeOrder("elixir, Shirley's Temple, 4.12")*/
+    //7.7 com.bignerdranch.nyethack.placeOrder("shandy, Dragon's Breath, 5.91")
+    //8.1 com.bignerdranch.nyethack.placeOrder("elixir, Shirley's Temple, 4.12")*/
     if (patronList.contains("Eli")) {
         println("The tavern master says: Eli's in the back plaing cards.")
     } else {
@@ -52,23 +54,23 @@ fun main(args: Array <String>) {
     } else {
         println("The tavern master  says: Nay, they departed hours ago.")
     }
-    /*//placeOrder("shandy, Dragon's Breath, 5.91")
-    //println(patronList[0])//10.4 10.10
-    //println(patronList)
-    patronList.remove("Eli")
-    patronList.add("Alex")
-    patronList.add(0, "Alex")//10.11
-    patronList[0] = "Alexis"//10.12
-    println(patronList)
-    for (patron in patronList) {
+    /*//com.bignerdranch.nyethack.placeOrder("shandy, Dragon's Breath, 5.91")
+    //println(com.bignerdranch.nyethack.getPatronList[0])//10.4 10.10
+    //println(com.bignerdranch.nyethack.getPatronList)
+    com.bignerdranch.nyethack.getPatronList.remove("Eli")
+    com.bignerdranch.nyethack.getPatronList.add("Alex")
+    com.bignerdranch.nyethack.getPatronList.add(0, "Alex")//10.11
+    com.bignerdranch.nyethack.getPatronList[0] = "Alexis"//10.12
+    println(com.bignerdranch.nyethack.getPatronList)
+    for (patron in com.bignerdranch.nyethack.getPatronList) {
         println("Good evening, $patron")
     }
-    patronList.forEachIndexed{index, patron -> //10.15
+    com.bignerdranch.nyethack.getPatronList.forEachIndexed{index, patron -> //10.15
         println("Good evening, $patron - you're #${index + 1} in line.")
-        placeOrder(patron, menuList.shuffled().first())//10.19
+        com.bignerdranch.nyethack.placeOrder(patron, com.bignerdranch.nyethack.getMenuList.shuffled().first())//10.19
     }
 
-    menuList.forEachIndexed {index, data ->
+    com.bignerdranch.nyethack.getMenuList.forEachIndexed {index, data ->
         println("$index : $data")
     }//10.24*/
 
@@ -79,7 +81,7 @@ fun main(args: Array <String>) {
         //println(name) 10.25
         uniquePatrons += name
     }
-    //11.5println(uniquePatrons)
+    //11.5println(com.bignerdranch.nyethack.getUniquePatrons)
     uniquePatrons.forEach { patronGold[it] = 6.0 }
 
     var orderCount = 0 //10.26
@@ -90,10 +92,10 @@ fun main(args: Array <String>) {
         )
         orderCount++
     }
-    /*println(patronGold)//11.1
-    println(patronGold["Eli"])
-    println(patronGold["Mordoc"])
-    println(patronGold["Sophie"])//11.4*/
+    /*println(com.bignerdranch.nyethack.getPatronGold)//11.1
+    println(com.bignerdranch.nyethack.getPatronGold["Eli"])
+    println(com.bignerdranch.nyethack.getPatronGold["Mordoc"])
+    println(com.bignerdranch.nyethack.getPatronGold["Sophie"])//11.4*/
     displayPatronBalances()//11.7
 
     patronList.forEach { patron ->
@@ -107,7 +109,7 @@ private fun displayPatronBalances() {
         println("$patron, balance: ${"%.2f".format(balance)}")
     }
 }
-/*fun performPurchase(price: Double) {
+/*fun com.bignerdranch.nyethack.performPurchase(price: Double) {
     displayBalance()
     val totalPurse = playerGold + (playerSilver / 100.0) //8.4
     println("Total purse: $totalPurse")
@@ -122,7 +124,7 @@ private fun displayPatronBalances() {
 }
 
 private fun displayBalance() {
-    println("Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
+    println("com.bignerdranch.nyethack.Player's purse balance: Gold: $playerGold, Silver: $playerSilver")
 }*/
 
 fun performPurchase(price: Double, patronName: String) {
@@ -157,9 +159,9 @@ private fun placeOrder(patronName: String, menuData: String) {
     println(message)
 
     /*7.6 val phrase = "Ah, delicious $name!"
-    println("Madrigal exclaims: ${toDragonSpeak(phrase)}")
+    println("Madrigal exclaims: ${com.bignerdranch.nyethack.toDragonSpeak(phrase)}")
 
-    //performPurchase(price.toDouble())//8.1 8.3*/
+    //com.bignerdranch.nyethack.performPurchase(price.toDouble())//8.1 8.3*/
 
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims ${toDragonSpeak("Ah, delicious $name!")}"
