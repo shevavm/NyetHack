@@ -1,17 +1,35 @@
 package com.bignerdranch.nyethack
 
+import java.io.File
+import java.lang.reflect.Array.get
 
-class Player {
-    var name: String = "madrigal"
+
+class Player(
+    _name: String,
+    var healthPoint: Int = 100,
+    val isBlessed: Boolean,
+    private val isImmortal: Boolean
+) {
+    var name = _name
         //12.5//12.10
-        get() = field.capitalize()//12.8
+        get() = "${field.capitalize()} of $hometown}"//12.8
         private set(value) {//12.12
             field = value.trim()//12.9
         }
+    val hometown by lazy { selectHometown() }
 
-    var healthPoint = 89
-    val isBlessed = true
-    private val isImmortal = false //12.16-17 refactoring
+    init {
+        require(healthPoint > 0, { "healthPoint must be greater thah zero." })
+        require(name.isNotBlank(), { "Player must have a name." })
+    }
+
+    constructor(name: String) : this(
+        name,
+        isBlessed = true,
+        isImmortal = false
+    ) {
+        if (name.toLowerCase() == "kar") healthPoint = 40
+    }
 
     fun auraColor(): String {
         val auraVisible = isBlessed && healthPoint > 50 || isImmortal
@@ -34,4 +52,10 @@ class Player {
 
     fun castFireball(numFireballs: Int = 2) =
         println("A glass of Fireball springs into existence. (x$numFireballs)")//12.3
+
+    private fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .shuffled()
+        .first()
 }
