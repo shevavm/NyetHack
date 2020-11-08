@@ -1,6 +1,6 @@
 package com.bignerdranch.nyethack
 
-@Suppress("MemberVisibilityCanBePrivate")
+
 class Player {
     var name: String = "madrigal"
         //12.5//12.10
