@@ -1,33 +1,20 @@
 package com.bignerdranch.nyethack
 
 import java.io.File
-import java.lang.reflect.Array.get
 
-
-class Player(
-    _name: String,
-    var healthPoint: Int = 100,
-    val isBlessed: Boolean,
-    private val isImmortal: Boolean
-) {
+class Player(_name: String, var healthPoint: Int = 100, val isBlessed: Boolean, val isImmortal: Boolean) {
     var name = _name
-        //12.5//12.10
-        get() = "${field.capitalize()} of $hometown}"//12.8
-        private set(value) {//12.12
-            field = value.trim()//12.9
+        get() = "${field.capitalize()} $hometown"
+        private set(value) {
+            field = value.trim()
         }
     val hometown by lazy { selectHometown() }
-
     init {
         require(healthPoint > 0, { "healthPoint must be greater thah zero." })
         require(name.isNotBlank(), { "Player must have a name." })
     }
 
-    constructor(name: String) : this(
-        name,
-        isBlessed = true,
-        isImmortal = false
-    ) {
+    constructor(name: String) : this(name, isBlessed = true, isImmortal = false) {
         if (name.toLowerCase() == "kar") healthPoint = 40
     }
 
