@@ -14,7 +14,7 @@ interface Fightable {
     fun attack(opponent: Fightable): Int
 }
 
-annotation class Monster(
+abstract class Monster(
     val name: String,
     val description: String,
     override var healthPoint: Int

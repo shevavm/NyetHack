@@ -10,18 +10,19 @@ class Player(
 ) : Fightable {
     override val diceCount: Int = 3
     //get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val diceSides: Int = 6
 
+    override val diceSides: Int = 6
     //get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+
     override fun attack(opponent: Fightable): Int {
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        val damageDeaLt: if (isBlessed) {
+        val damageDealt: if (isBlessed) {
             damageRoll * 2
         } else {
             damageRoll
         }
-        opponent.healthPoint -= damageDeaLt
-        return damageDeaLt
+        opponent.healthPoint -= damageDealt
+        return damageDealt
     }//16.2-3
     var name = _name
         get() = "${field.capitalize()} $hometown"

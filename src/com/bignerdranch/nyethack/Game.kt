@@ -68,6 +68,7 @@ object Game {
     private fun slay(monster: Monster) {
         println("${monster.name} did ${monster.attack(player)} damage!")
         println("${player.name} did ${player.attack(monster)} damage!")
+
         if (player.healthPoint <= 0) {
             println(">>>> You have bean been defeated! Thanks for playing. <<<<")
             exitProcess(0)
