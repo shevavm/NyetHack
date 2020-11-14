@@ -1,5 +1,7 @@
 package com.bignerdranch.nyethack
 
+import kotlin.system.exitProcess
+
 
 fun main(args: Array<String>) {
     Game.play()
@@ -40,19 +42,6 @@ object Game {
 
     }
 
-    private class GameInput(arg: String?) {
-        private val input = arg ?: ""
-        val command = input.split(" ")[0]
-        val argument = input.split(" ").getOrElse(1, { " " })
-        fun processCommand() = when (command.toLowerCase()) {
-            "move" -> move(argument)
-            else -> commandNotFound()
-        }
-
-        private fun commandNotFound() = "I'm not quite sure what your'e truing to do!"
-
-    }
-
     private fun move(directionInput: String) =
         try {
             val direction = Direction.valueOf(directionInput.toUpperCase())
@@ -67,4 +56,40 @@ object Game {
         } catch (e: Exception) {
             "Invalid direction: $directionInput."
         }
+
+    private fun fight() = currentRoom.monster?.let {
+        while (player.healthPoint > 0 && it.healthPoint > 0) {
+            slay(it)
+            Thread.sleep(1000)
+        }
+        "Combat complete."
+    } ?: "There's nothing here to fight."
+
+    private fun slay(monster: Monster) {
+        println("${monster.name} did ${monster.attack(player)} damage!")
+        println("${player.name} did ${player.attack(monster)} damage!")
+        if (player.healthPoint <= 0) {
+            println(">>>> You have bean been defeated! Thanks for playing. <<<<")
+            exitProcess(0)
+        }
+        if (monster.healthPoint <= 0) {
+            println(">>>> ${monster.name} has been defeated! <<<<")
+            currentRoom.monster = null
+        }
+    }
+
+    private class GameInput(arg: String?) {
+        private val input = arg ?: ""
+        val command = input.split(" ")[0]
+        val argument = input.split(" ").getOrElse(1, { " " })
+
+        fun processCommand() = when (command.toLowerCase()) {
+            "fight" -> fight()
+            "move" -> move(argument)
+            else -> commandNotFound()
+        }
+
+        private fun commandNotFound() = "I'm not quite sure what your'e truing to do!"
+
+    }
 }
