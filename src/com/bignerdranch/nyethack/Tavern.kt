@@ -17,6 +17,7 @@ val menuList = File("data/tavern-menu-items.txt")
 //val com.bignerdranch.nyethack.getPatronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)//11.5
 val patronGold = mutableMapOf<String, Double>()
 
+
 //6.1
 fun main(args: Array <String>) {
     /*6.2 var signatureDrink = "Buttered Ale"
@@ -75,8 +76,8 @@ fun main(args: Array <String>) {
     }//10.24*/
 
     (0..9).forEach {
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
+        val first = patronList.random()
+        val last = lastName.random()
         val name = "$first $last"
         //println(name) 10.25
         uniquePatrons += name
@@ -87,8 +88,8 @@ fun main(args: Array <String>) {
     var orderCount = 0 //10.26
     while (orderCount <= 9) {
         placeOrder(
-            uniquePatrons.shuffled().first(),
-            menuList.shuffled().first()
+            uniquePatrons.random(),
+            menuList.random()
         )
         orderCount++
     }

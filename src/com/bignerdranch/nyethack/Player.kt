@@ -1,6 +1,7 @@
 package com.bignerdranch.nyethack
 
 import java.io.File
+import com.bignerdranch.nyethack.extensions.random as randomizer
 
 class Player(
     _name: String,
@@ -8,22 +9,6 @@ class Player(
     val isBlessed: Boolean,
     private var isImmortal: Boolean
 ) : Fightable {
-    override val diceCount: Int = 3
-    //get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-
-    override val diceSides: Int = 6
-    //get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-
-    override fun attack(opponent: Fightable): Int {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        val damageDealt: if (isBlessed) {
-            damageRoll * 2
-        } else {
-            damageRoll
-        }
-        opponent.healthPoint -= damageDealt
-        return damageDealt
-    }//16.2-3
     var name = _name
         get() = "${field.capitalize()} $hometown"
         private set(value) {
@@ -65,6 +50,22 @@ class Player(
     private fun selectHometown() = File("data/towns.txt")
         .readText()
         .split("\n")
-        .shuffled()
-        .first()
+        .randomizer()
+    //.random() 18.16
+    //.shuffled() 18.15
+    //.first()
+
+    override val diceCount: Int = 3
+
+    override val diceSides: Int = 6
+
+    override fun attack(opponent: Fightable): Int {
+        val damageDealt = if (isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+        opponent.healthPoint -= damageDealt
+        return damageDealt
+    }//16.2-3
 }
